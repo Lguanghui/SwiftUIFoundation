@@ -15,9 +15,9 @@ Pod::Spec.new do |spec|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  spec.name         = "SwiftUIKit"
+  spec.name         = "SwiftUIFoundation"
   spec.version      = "0.0.2"
-  spec.summary      = "SwiftUIKit"
+  spec.summary      = "SwiftUIFoundation"
   spec.swift_version = '5.0'
 
   # This description is used to generate tags and improve search results.
@@ -26,7 +26,7 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
-                        SwiftUIKit
+                        SwiftUIFoundation
                        DESC
 
   spec.homepage     = "https://github.com/Lguanghui"
@@ -54,7 +54,7 @@ Pod::Spec.new do |spec|
   #  profile URL.
   #
 
-  spec.author             = { "liangguanghui" => "liangguanghui@buaa.edu.cn" }
+  spec.author             = { "liangguanghui" => "liangguanghui1998@gmail.com" }
   # Or just: spec.author    = "liangguanghui"
   # spec.authors            = { "liangguanghui" => "liangguanghui@buaa.edu.cn" }
   # spec.social_media_url   = "https://twitter.com/liangguanghui"
