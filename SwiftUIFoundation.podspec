@@ -29,7 +29,7 @@ Pod::Spec.new do |spec|
                         SwiftUIFoundation
                        DESC
 
-  spec.homepage     = "https://github.com/Lguanghui"
+  spec.homepage     = "https://github.com/Lguanghui/SwiftUIFoundation"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
