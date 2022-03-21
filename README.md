@@ -1,6 +1,9 @@
 # SwiftUIKit
 
 **A Library for extensions and effective codes of SwiftUI.**
+![platform](https://img.shields.io/cocoapods/p/SwiftUIFoundation)
+[![release](https://img.shields.io/badge/release-0.0.2-blue)](https://github.com/Lguanghui/SwiftUIFoundation/releases)
+![MIT](https://img.shields.io/github/license/Lguanghui/SwiftUIFoundation)
 
 ## Usage
 
@@ -18,4 +21,4 @@ dependencies: [
 ]
 ```
 
-or just select Xcode menu File -> Add Packages, and then search `https://github.com/Lguanghui/SwiftUIFoundation` 
+Or just select Xcode menu File -> Add Packages, and search `https://github.com/Lguanghui/SwiftUIFoundation` 
