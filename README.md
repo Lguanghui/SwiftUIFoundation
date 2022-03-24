@@ -24,3 +24,7 @@ dependencies: [
 ```
 
 Or just select Xcode menu File -> Add Packages, and search `https://github.com/Lguanghui/SwiftUIFoundation` 
+
+## License
+
+SwiftUIFoundation is available under the MIT license. See the LICENSE file for more info.
