@@ -9,22 +9,67 @@ import Foundation
 import SwiftUI
 
 extension Color {
-    /// 获取颜色，默认透明度为1.0
-    public static func gh_color(fromHex hex: UInt) -> Color {
-        return Self.gh_color(fromHex: hex, opacity: 1.0)
+    
+    /// **get Color from RGBA / RGB Hex**
+    /// - Parameter hex: RGBA / RGB Hex. Alpha is optional. e.g. 0xF6F6F6, 0xF6F6F6FF
+    /// - Returns: a Color from given hex
+    public static func color(fromRGBAHex hex: UInt) -> Color {
+        guard hex != 0 else {
+            return .black
+        }
+        
+        var red: Double = 1.0
+        var green: Double = 1.0
+        var blue: Double = 1.0
+        var alpha: Double = 1.0
+        
+        if hex <= 0xFFFFFF {
+            // no Alpha. e.g. 0xF6F6F6
+            red = Double(((hex & 0xFF0000) >> 16)) / 255.0
+            green = Double(((hex & 0xFF00) >> 8)) / 255.0
+            blue = Double((hex & 0xFF)) / 255.0
+        } else {
+            // has Alpha. e.g. 0xF6F6F6FF
+            red = Double((hex & 0xFF000000) >> 24) / 255.0
+            green = Double((hex & 0xFF0000) >> 16) / 255.0
+            blue = Double((hex & 0xFF00) >> 8) / 255.0
+            alpha = Double((hex & 0xFF)) / 255.0
+        }
+        return Self.init(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
     }
     
-    /// 获取颜色，可指定透明度
-    public static func gh_color(fromHex hex: UInt, opacity: Double) -> Color {
-        return Self.init(.displayP3,
-                         red: Double(((hex & 0xFF0000) >> 16)) / 255.0,
-                         green: Double(((hex & 0xFF00) >> 8)) / 255.0,
-                         blue: Double((hex & 0xFF)) / 255.0,
-                         opacity: opacity)
+    /// **get Color from ARGB / RGB Hex**
+    /// - Parameter hex: ARGB / RGB Hex. Alpha is optional. e.g. 0xF6F6F6, 0xFFF6F6F6
+    /// - Returns: a Color from given hex
+    public static func color(fromARGBHex hex: UInt) -> Color {
+        guard hex != 0 else {
+            return .black
+        }
+        
+        var red: Double = 1.0
+        var green: Double = 1.0
+        var blue: Double = 1.0
+        var alpha: Double = 1.0
+        
+        if hex <= 0xFFFFFF {
+            // no Alpha. e.g. 0xF6F6F6
+            red = Double(((hex & 0xFF0000) >> 16)) / 255.0
+            green = Double(((hex & 0xFF00) >> 8)) / 255.0
+            blue = Double((hex & 0xFF)) / 255.0
+        } else {
+            // has Alpha. e.g. 0xFFF6F6F6
+            alpha = Double((hex & 0xFF000000) >> 24) / 255.0
+            red = Double((hex & 0xFF0000) >> 16) / 255.0
+            green = Double((hex & 0xFF00) >> 8) / 255.0
+            blue = Double((hex & 0xFF)) / 255.0
+        }
+        return Self.init(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
     }
     
-    /// 从字符串中获取颜色，其中 alpha 通道可有可无
-    public static func gh_color(withRGBAHex rgba: String) -> Color? {
+    /// **get Color from RGBA / RGB Str**
+    /// - Parameter rgba: RGBA / RGB str. Alpha is optional. e.g. "#F6F6F6", "#F6F6F6FF"
+    /// - Returns: a Color from given RGBA str
+    public static func color(withRGBAHex rgba: String) -> Color? {
         if rgba.count == 0 {
             return nil
         } else {
@@ -70,8 +115,11 @@ extension Color {
         }
     }
     
-    /// 从字符串中获取颜色，其中 alpha 通道在第一位（alpha 通道可有可无）
-    public static func gh_color(withARGBHex argb: String) -> Color? {
+    
+    /// **get Color from ARGB / RGB Str**
+    /// - Parameter argb: ARGB / RGB str, e.g. "#F6F6F6", "#FFF6F6F6"
+    /// - Returns: a Color from ARGB str
+    public static func color(withARGBHex argb: String) -> Color? {
         if argb.count == 0 {
             return nil
         } else {
