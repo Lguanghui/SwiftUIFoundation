@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Color+Hex.swift
 //  
 //
 //  Created by 梁光辉 on 2022/3/19.
@@ -10,67 +10,92 @@ import SwiftUI
 
 extension Color {
     
-    /// **get Color from RGBA / RGB Hex**
-    /// - Parameter hex: RGBA / RGB Hex. Alpha is optional. e.g. 0xF6F6F6, 0xF6F6F6FF
+    /// get Color from RGBA or RGB hex
+    /// - Parameter hex: RGBA / RGB hex. Alpha is optional. e.g. `0xF6F6F6`, `0xF6F6F6FF`
     /// - Returns: a Color from given hex
     public static func color(fromRGBAHex hex: UInt) -> Color {
-        guard hex != 0 else {
-            return .black
-        }
-        
-        var red: Double = 1.0
-        var green: Double = 1.0
-        var blue: Double = 1.0
-        var alpha: Double = 1.0
-        
-        if hex <= 0xFFFFFF {
-            // no Alpha. e.g. 0xF6F6F6
-            red = Double(((hex & 0xFF0000) >> 16)) / 255.0
-            green = Double(((hex & 0xFF00) >> 8)) / 255.0
-            blue = Double((hex & 0xFF)) / 255.0
-        } else {
-            // has Alpha. e.g. 0xF6F6F6FF
-            red = Double((hex & 0xFF000000) >> 24) / 255.0
-            green = Double((hex & 0xFF0000) >> 16) / 255.0
-            blue = Double((hex & 0xFF00) >> 8) / 255.0
-            alpha = Double((hex & 0xFF)) / 255.0
-        }
-        return Self.init(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
+        return Color(RGBAHex: hex)
     }
     
-    /// **get Color from ARGB / RGB Hex**
-    /// - Parameter hex: ARGB / RGB Hex. Alpha is optional. e.g. 0xF6F6F6, 0xFFF6F6F6
+    /// get Color from ARGB or RGB hex
+    /// - Parameter hex: ARGB / RGB hex. Alpha is optional. e.g. `0xF6F6F6`, `0xFFF6F6F6`
     /// - Returns: a Color from given hex
     public static func color(fromARGBHex hex: UInt) -> Color {
-        guard hex != 0 else {
-            return .black
-        }
-        
+        return Color(ARGBHex: hex)
+    }
+    
+    /// get Color from RGBA or RGB string
+    /// - Parameter rgba: RGBA / RGB string. Alpha is optional. e.g. `"#F6F6F6"`, `"#F6F6F6FF"`
+    /// - Returns: a Color from given RGBA str
+    public static func color(withRGBAHex rgba: String) -> Color? {
+        return Color(RGBAHexStr: rgba)
+    }
+    
+    
+    /// get Color from ARGB or RGB string
+    /// - Parameter argb: ARGB / RGB string. e.g. `"#F6F6F6"`, `"#FFF6F6F6"`
+    /// - Returns: a Color from ARGB str
+    public static func color(withARGBHex argb: String) -> Color? {
+        return Color(ARGBHexStr: argb)
+    }
+}
+
+extension Color {
+    
+    /// initialize Color from RGBA or RGB hex
+    /// - Parameter hex: RGBA / RGB Hex. Alpha is optional. e.g. `0xF6F6F6`, `0xF6F6F6FF`
+    public init(RGBAHex hex: UInt) {
         var red: Double = 1.0
         var green: Double = 1.0
         var blue: Double = 1.0
         var alpha: Double = 1.0
         
-        if hex <= 0xFFFFFF {
-            // no Alpha. e.g. 0xF6F6F6
-            red = Double(((hex & 0xFF0000) >> 16)) / 255.0
-            green = Double(((hex & 0xFF00) >> 8)) / 255.0
-            blue = Double((hex & 0xFF)) / 255.0
-        } else {
-            // has Alpha. e.g. 0xFFF6F6F6
-            alpha = Double((hex & 0xFF000000) >> 24) / 255.0
-            red = Double((hex & 0xFF0000) >> 16) / 255.0
-            green = Double((hex & 0xFF00) >> 8) / 255.0
-            blue = Double((hex & 0xFF)) / 255.0
+        if hex >= 0 {
+            if hex <= 0xFFFFFF {
+                // no Alpha. e.g. 0xF6F6F6
+                red = Double(((hex & 0xFF0000) >> 16)) / 255.0
+                green = Double(((hex & 0xFF00) >> 8)) / 255.0
+                blue = Double((hex & 0xFF)) / 255.0
+            } else {
+                // has Alpha. e.g. 0xF6F6F6FF
+                red = Double((hex & 0xFF000000) >> 24) / 255.0
+                green = Double((hex & 0xFF0000) >> 16) / 255.0
+                blue = Double((hex & 0xFF00) >> 8) / 255.0
+                alpha = Double((hex & 0xFF)) / 255.0
+            }
         }
-        return Self.init(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
+        self.init(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
     }
     
-    /// **get Color from RGBA / RGB Str**
-    /// - Parameter rgba: RGBA / RGB str. Alpha is optional. e.g. "#F6F6F6", "#F6F6F6FF"
-    /// - Returns: a Color from given RGBA str
-    public static func color(withRGBAHex rgba: String) -> Color? {
-        if rgba.count == 0 {
+    /// initialize Color from ARGB or RGB hex
+    /// - Parameter hex: ARGB / RGB hex. Alpha is optional. e.g. `0xF6F6F6`, `0xFFF6F6F6`
+    public init(ARGBHex hex: UInt) {
+        var red: Double = 1.0
+        var green: Double = 1.0
+        var blue: Double = 1.0
+        var alpha: Double = 1.0
+        
+        if hex > 0 {
+            if hex <= 0xFFFFFF {
+                // no Alpha. e.g. 0xF6F6F6
+                red = Double(((hex & 0xFF0000) >> 16)) / 255.0
+                green = Double(((hex & 0xFF00) >> 8)) / 255.0
+                blue = Double((hex & 0xFF)) / 255.0
+            } else {
+                // has Alpha. e.g. 0xFFF6F6F6
+                alpha = Double((hex & 0xFF000000) >> 24) / 255.0
+                red = Double((hex & 0xFF0000) >> 16) / 255.0
+                green = Double((hex & 0xFF00) >> 8) / 255.0
+                blue = Double((hex & 0xFF)) / 255.0
+            }
+        }
+        self.init(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
+    }
+    
+    /// initialize Color from RGBA or RGB string
+    /// - Parameter rgba: RGBA / RGB string. Alpha is optional. e.g. `"#F6F6F6"`, `"#F6F6F6FF"`
+    public init?(RGBAHexStr rgba: String) {
+        if rgba.isEmpty {
             return nil
         } else {
             var red: Double = 1.0
@@ -111,15 +136,13 @@ extension Color {
             } else {
                 return nil
             }
-            return Self.init(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
+            self.init(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
         }
     }
     
-    
-    /// **get Color from ARGB / RGB Str**
-    /// - Parameter argb: ARGB / RGB str, e.g. "#F6F6F6", "#FFF6F6F6"
-    /// - Returns: a Color from ARGB str
-    public static func color(withARGBHex argb: String) -> Color? {
+    /// initialize Color from ARGB or RGB string
+    /// - Parameter argb: ARGB / RGB string, e.g. `"#F6F6F6"`, `"#FFF6F6F6"`
+    public init?(ARGBHexStr argb: String) {
         if argb.count == 0 {
             return nil
         } else {
@@ -161,8 +184,56 @@ extension Color {
             } else {
                 return nil
             }
-            return Self.init(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
+            self.init(.displayP3, red: red, green: green, blue: blue, opacity: alpha)
         }
     }
 }
 
+#Preview{
+    VStack {
+        Rectangle()
+            .background(Color(RGBAHex: 0xFF0000))
+            .frame(height: 50)
+        Rectangle()
+            .background(Color(RGBAHex: 0xFF000000))
+            .frame(height: 50)
+        Rectangle()
+            .background(Color.red)
+            .frame(height: 50)
+        Rectangle()
+            .background(Color(RGBAHexStr: "#FF0000"))
+            .frame(height: 50)
+        Rectangle()
+            .background(Color(RGBAHexStr: "#F00"))
+            .frame(height: 50)
+        
+        
+        Rectangle()
+            .background(Color(RGBAHex: 0x0000FF))
+            .frame(height: 50)
+        Rectangle()
+            .background(Color.blue)
+            .frame(height: 50)
+        Rectangle()
+            .background(Color(RGBAHexStr: "#0000FF"))
+            .frame(height: 50)
+        Rectangle()
+            .background(Color(RGBAHexStr: "#00F"))
+            .frame(height: 50)
+        
+        Rectangle()
+            .background(Color(RGBAHex: 0x00FF00))
+            .frame(height: 50)
+        Rectangle()
+            .background(Color.green)
+            .frame(height: 50)
+        Rectangle()
+            .background(Color(RGBAHexStr: "#00FF00"))
+            .frame(height: 50)
+        Rectangle()
+            .background(Color(RGBAHexStr: "#0F0"))
+            .frame(height: 50)
+        
+        
+    }
+}
