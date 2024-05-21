@@ -6,6 +6,8 @@
 //  Copyright © 2024 Guanghui Liang. All rights reserved.
 //
 
+import SwiftUI
+
 public struct LazyView<Content: View>: View {
     let build: () -> Content
     init(_ build: @escaping () -> Content) {
