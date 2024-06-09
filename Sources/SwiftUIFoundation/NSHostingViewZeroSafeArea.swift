@@ -6,8 +6,10 @@
 //  Copyright © 2024 Guanghui Liang. All rights reserved.
 //
 
+import SwiftUI
+
 public class NSHostingViewZeroSafeArea<T : View>: NSHostingView<T> {
-    required init(rootView: T) {
+    public required init(rootView: T) {
         super.init(rootView: rootView)
 
         addLayoutGuide(layoutGuide)
