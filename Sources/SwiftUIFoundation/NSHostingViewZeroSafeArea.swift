@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import AppKit
 
 public class NSHostingViewZeroSafeArea<T : View>: NSHostingView<T> {
     public required init(rootView: T) {
