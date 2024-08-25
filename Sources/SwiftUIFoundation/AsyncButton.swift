@@ -10,7 +10,7 @@ import SwiftUI
 import FoundationX
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-struct AsyncButton<Label>: View where Label: View {
+public struct AsyncButton<Label>: View where Label: View {
 
     typealias Action = @Sendable @MainActor () async throws -> Void
 
@@ -25,7 +25,7 @@ struct AsyncButton<Label>: View where Label: View {
         self.label = label()
     }
 
-    var body: some View {
+    public var body: some View {
         Button {
             Task<Void, Never> {
                 do {
