@@ -12,12 +12,12 @@ import FoundationX
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct AsyncButton<Label>: View where Label: View {
 
-    typealias Action = @Sendable @MainActor () async throws -> Void
+    public typealias Action = @Sendable @MainActor () async throws -> Void
 
     private let action: Action
     private let label: Label
 
-    init(
+    public init(
         action: @escaping Action,
         @ViewBuilder label: () -> Label
     ) {
