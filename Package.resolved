@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "foundationx",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Lguanghui/FoundationX.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "9387dae168a6f44d16263d4946f69b17887f402b"
+      }
+    }
+  ],
+  "version" : 2
+}
