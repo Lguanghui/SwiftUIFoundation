@@ -48,6 +48,7 @@ public struct AsyncButton<Label>: View where Label: View {
         } label: {
             Text("Hello World!")
         }
+        .frame(width: 200, height: 50)
     } else {
         // Fallback on earlier versions
         EmptyView()
