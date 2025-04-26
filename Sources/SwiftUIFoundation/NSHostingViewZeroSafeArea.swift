@@ -7,8 +7,10 @@
 //
 
 import SwiftUI
+#if canImport(AppKit)
 import AppKit
 
+@available(macOS 12.0, *)
 public class NSHostingViewZeroSafeArea<T : View>: NSHostingView<T> {
     public required init(rootView: T) {
         super.init(rootView: rootView)
@@ -50,3 +52,4 @@ public class NSHostingViewZeroSafeArea<T : View>: NSHostingView<T> {
         }
     }
 }
+#endif
